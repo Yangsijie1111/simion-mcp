@@ -1,0 +1,23 @@
+; lens.gem -- three-element einzel lens, test geometry for simion-mcp.
+;
+; Cylindrical symmetry about the x axis. The outer two barrels are held at the
+; beam potential and the centre ring does the focusing, so sweeping electrode 2
+; alone moves the focus along the axis -- which makes it a clean target for
+; simion_sweep / simion_fit_response_surface.
+;
+; Electrode names are the trailing comment on each declaration. That is the
+; convention simion_inspect_workbench reads, so keep the `; name` form.
+;
+; Grid is 91 x 20 to match the workbench in lens.iob; changing these dimensions
+; requires a workbench rebuilt in the SIMION GUI.
+
+pa_define(91,20,1, cylindrical,, electrostatic)
+
+electrode(1); entrance_barrel
+{ rotate_fill(360) { within { box( 0,18, 28,19) } } }
+
+electrode(2); focus_ring
+{ rotate_fill(360) { within { box(30,18, 56,19) } } }
+
+electrode(3); exit_barrel
+{ rotate_fill(360) { within { box(58,18, 90,19) } } }
